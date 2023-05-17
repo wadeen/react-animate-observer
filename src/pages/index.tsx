@@ -8,11 +8,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>This is Test space</h1>
-      <ScrollReveal style={{ width: "800px", height: "600px", background: "whitesmoke", marginBottom: "50%" }}>This is Div space</ScrollReveal>
-      <ScrollReveal as="section" style={{ width: "800px", height: "600px", background: "teal" }}>
-        This is Div space
+    <div className={styles.wrapper}>
+      <h1 className={styles.title}>This is Test space</h1>
+      <ScrollReveal className={styles.div}>This is Div space</ScrollReveal>
+      <ScrollReveal className={styles.section}>This is Section space</ScrollReveal>
+      <ScrollReveal className={styles.div}>This is Div space</ScrollReveal>
+      <ScrollReveal as="section" className={styles.section}>
+        This is Section space
       </ScrollReveal>
     </div>
   );
