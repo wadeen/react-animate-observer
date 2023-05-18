@@ -1,50 +1,32 @@
-export type StyleProps = TransformProps & TransitionProps & AnimationProps & FilterProps;
+export type StyleProps = TransformProps & TransitionProps & FilterProps;
 
 export type TransformProps = Partial<{
-  x: string | number;
-  y: string | number;
-  z: string | number;
-  rotate: string | number;
-  rotateX: string | number;
-  rotateY: string | number;
-  rotateZ: string | number;
-  skew: string | number;
-  skewX: string | number;
-  skewY: string | number;
-  originX: string | number;
-  originY: string | number;
-  originZ: string | number;
-  perspective: string | number;
-  scale: string | number;
-  scaleX: string | number;
-  scaleY: string | number;
-  scaleZ: string | number;
-  transform: string | number;
-  transformOrigin: string | number;
-  transformStyle: string | number;
+  x: number;
+  y: number;
+  z: number;
+  rotateX: number;
+  rotateY: number;
+  rotateZ: number;
+  skewX: number;
+  skewY: number;
+  scaleX: number;
+  scaleY: number;
+  scaleZ: number;
+  origin: 'left' | 'right' | 'center';
 }>;
 
 export type TransitionProps = Partial<{
-  transition: string | number;
-  transitionDelay: string | number;
-  transitionDuration: string | number;
-  transitionProperty: string | number;
-  transitionTimingFunction: string | number;
-  transitionEnd: string | number;
-  transitionStart: string | number;
-  transitionIterationCount: string | number;
-  transitionDirection: string | number;
-  transitionFillMode: string | number;
-  transitionPlayState: string | number;
-}>;
-
-export type AnimationProps = Partial<{
-  visibility: string | number;
-  willChange: string | number;
+  delay: number;
+  duration: number;
+  timing: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear';
 }>;
 
 export type FilterProps = Partial<{
-  opacity: string | number;
-  filter: string | number;
-  backdropFilter: string | number;
+  opacity: number;
 }>;
+
+type TransformPropsToCSS = {
+  // transition: ScrollRevealProps['transition'];
+  // animation: ScrollRevealProps['start'];
+  // animation: any;
+};
