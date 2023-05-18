@@ -1,9 +1,14 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect, RefObject, RefCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const useIntersectionObserver = () => {
-  const ref = useRef<HTMLElement | null>(null);
+type IntersectionObserverReturnType = [RefCallback<HTMLElement>, boolean];
+
+const useIntersectionObserver = (): IntersectionObserverReturnType => {
   const [rootMargin, setRootMargin] = useState('-25% 0px');
+  const { ref: inViewRef, inView } = useInView({
+    triggerOnce: true,
+    rootMargin,
+  });
 
   useEffect(() => {
     const updateRootMargin = () => {
@@ -27,13 +32,7 @@ const useIntersectionObserver = () => {
     };
   }, []);
 
-  const { inView, ref: inViewRef } = useInView({
-    triggerOnce: true,
-    rootMargin,
-  });
-
-  const setRefs = (node: HTMLElement | null) => {
-    ref.current = node;
+  const setRefs: RefCallback<HTMLElement> = (node) => {
     inViewRef(node);
   };
 
