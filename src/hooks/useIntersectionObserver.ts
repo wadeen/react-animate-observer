@@ -1,42 +1,73 @@
-import { useState, useEffect, RefObject, RefCallback } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { useState, useEffect, useRef } from 'react';
 
-type IntersectionObserverReturnType = [RefCallback<HTMLElement>, boolean];
+/**
+ * A custom hook for observing if a DOM element is in the viewport.
+ * The hook uses the Intersection Observer API to check if the element is in view.
+ * @param {number} [width] - The minimum screen width where rootMargin changes. Default is 768px.
+ * @returns {[(node: HTMLElement | null) => void, boolean]} - A tuple where the first element is a function to set the node to be observed,
+ * and the second element is a boolean indicating whether the node is in view or not.
+ */
+const useIntersectionObserver = (width?: number) => {
+  const [inView, setInView] = useState(false);
+  const [node, setNode] = useState<HTMLElement | null>(null);
 
-const useIntersectionObserver = (): IntersectionObserverReturnType => {
-  const [rootMargin, setRootMargin] = useState('-25% 0px');
-  const { ref: inViewRef, inView } = useInView({
-    triggerOnce: true,
-    rootMargin,
-  });
+  const mediaQueryString = `(min-width: ${width ?? 768}px)`;
+  const LargeScreenRootMargin = '-25% 0px';
+  const SmallScreenRootMargin = '-5% 0px';
+
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    if (observer.current) observer.current.disconnect();
+
+    observer.current = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        rootMargin: window.matchMedia(mediaQueryString).matches
+          ? LargeScreenRootMargin
+          : SmallScreenRootMargin,
+        threshold: 0.1,
+      },
+    );
+
+    if (node) observer.current.observe(node);
+
+    return () => {
+      if (observer.current) observer.current.disconnect();
+    };
+  }, [node]);
 
   useEffect(() => {
     const updateRootMargin = () => {
-      setRootMargin(
-        window.matchMedia('(min-width: 768px)').matches
-          ? '-25% 0px'
-          : '-5% 0px',
-      );
+      if (observer.current) {
+        observer.current.disconnect();
+        observer.current = new IntersectionObserver(
+          ([entry]) => {
+            setInView(entry.isIntersecting);
+          },
+          {
+            rootMargin: window.matchMedia(mediaQueryString).matches
+              ? LargeScreenRootMargin
+              : SmallScreenRootMargin,
+            threshold: 0.1,
+          },
+        );
+        if (node) observer.current.observe(node);
+      }
     };
 
-    updateRootMargin(); // 初期設定
-    window
-      .matchMedia('(min-width: 768px)')
-      .addEventListener('change', updateRootMargin); // リスナーの設定
+    updateRootMargin(); // initial
+    const mediaQueryList = window.matchMedia(mediaQueryString);
+    mediaQueryList.addEventListener('change', updateRootMargin);
 
     return () => {
-      // コンポーネントがアンマウントされたときにリスナーを削除する
-      window
-        .matchMedia('(min-width: 768px)')
-        .removeEventListener('change', updateRootMargin);
+      mediaQueryList.removeEventListener('change', updateRootMargin);
     };
   }, []);
 
-  const setRefs: RefCallback<HTMLElement> = (node) => {
-    inViewRef(node);
-  };
-
-  return [setRefs, inView];
+  return [setNode, inView];
 };
 
 export default useIntersectionObserver;
