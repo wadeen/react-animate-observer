@@ -5,27 +5,25 @@ export default function Home() {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>This is Test space</h1>
-      <ScrollAnimator className={styles.div}>This is Div space</ScrollAnimator>
+
       <ScrollAnimator
-        // ToDo: transform まとめて書く
-        // ToDo: scaleとかの見直し(ReactのCSSPropertiesに合わせる必要あり)
-        start={{ opacity: 0, x: 30, y: 30, origin: 'left', rotateX: 100 }}
-        end={{ opacity: 1, x: 0, y: 0, origin: 'right', rotateX: 100 }}
-        transition={{ duration: 0.7, delay: 0.3 }}
+        start={{
+          opacity: 0,
+          translateY: 40,
+          marginBottom: 30,
+        }}
+        end={{ opacity: 1, translateY: 0 }}
+        transition={{
+          transitionDelay: 0.4,
+          transitionDuration: 0.8,
+          transitionTimingFunction: 'ease-in-out',
+        }}
         className={styles.section}
       >
         This is Section space
       </ScrollAnimator>
-      <ScrollAnimator customStyle={true} className={styles.div}>
-        This is Div space
-      </ScrollAnimator>
-      <ScrollAnimator
-        start={{ opacity: 0, skewX: 30, skewY: 30, rotateX: 180 }}
-        end={{ opacity: 1, skewX: 0, skewY: 0, rotateX: 0 }}
-        transition={{ duration: 0.7, delay: 0.3, timing: 'ease-in-out' }}
-        className={styles.section}
-      >
-        This is Section space
+      <ScrollAnimator as="section" className={styles.section}>
+        ああ
       </ScrollAnimator>
       <div
         style={{
@@ -33,34 +31,25 @@ export default function Home() {
           height: '800px',
           marginInline: 'auto',
           backgroundColor: 'springgreen',
-          scale: '0.5',
+          scale: 0.8,
+          translate: '100px',
           rotate: '45deg',
           transform: 'translateY(200px) translateX(100px)',
+          marginBottom: 30,
         }}
       >
-        test space
+        demo confirm space...
+        <br />
+        (default inline style)
       </div>
-      <hr />
-      <br />
-      <br />
-      <br />
-      <ScrollAnimator>
-        <img src="https://via.placeholder.com/400" alt="" />
-      </ScrollAnimator>
-      <br />
-      <br />
-      <ScrollAnimator>
-        <img src="https://via.placeholder.com/400" alt="" />
-      </ScrollAnimator>
-      <br />
-      <br />
-      <ScrollAnimator
-        start={{ opacity: 0, y: 130, skewX: 30 }}
-        end={{ opacity: 1, y: 0, skewX: 0 }}
-        transition={{ delay: 1, duration: 1, timing: 'ease-in-out' }}
-      >
-        <img src="https://via.placeholder.com/400" alt="" />
-      </ScrollAnimator>
     </div>
   );
 }
+
+/**
+ * ToDo:
+ * 1. X/yなどの簡易表記にするかどうか
+ * 2. 数字と単位を分けるかどうか(number/string)
+ * 3. 1回だけにするかどうかbooleanで
+ * 4. 最初のアニメーション
+ */

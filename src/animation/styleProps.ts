@@ -1,27 +1,13 @@
-import { FilterProps, TransformProps, TransitionProps } from './types';
+import { TransformProps } from './types';
 
-// Basic transform properties
+// Transform props: "Self-made" because it is not in CSSProperties
 export const transformProps: ReadonlyArray<keyof TransformProps> = [
-  'x',
-  'y',
-  'z',
-  'rotateX',
-  'rotateY',
-  'rotateZ',
+  'translateX',
+  'translateY',
+  'translateZ',
   'skewX',
   'skewY',
   'scaleX',
   'scaleY',
   'scaleZ',
-  'origin',
 ];
-
-// Basic transition properties
-export const transitionProps: ReadonlyArray<keyof TransitionProps> = [
-  'delay',
-  'duration',
-  'timing',
-];
-
-// Basic filter properties
-export const filterProps: ReadonlyArray<keyof FilterProps> = ['opacity'];

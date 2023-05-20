@@ -11,31 +11,24 @@ import {
 import { StyleProps, TransitionProps } from './types';
 import transformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 
-/**
- * @typedef {Object} ScrollAnimatorProps
- * @property {ReactNode} children - The components to be displayed within the ScrollAnimator.
- * @property {Omit<StyleProps, keyof TransitionProps>} [start]  - The initial style properties before animation.
- * @property {Omit<StyleProps, keyof TransitionProps>} [end] - The final style properties after animation.
- * @property {Pick<StyleProps, keyof TransitionProps>} [transition] - The transition properties for the animation.
- * @property {keyof JSX.IntrinsicElements} [as] - The HTML tag to use for the outer element.
- * @property {boolean} [customStyle] - If true, the component does not apply inline styles, and you should apply your styles with CSS.
- * @extends {HTMLAttributes<HTMLElement>}
- */
-
 export interface ScrollAnimatorProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
   start?: Omit<StyleProps, keyof TransitionProps>;
   end?: Omit<StyleProps, keyof TransitionProps>;
-  transition?: Pick<StyleProps, keyof TransitionProps>;
+  transition?: TransitionProps;
   as?: keyof JSX.IntrinsicElements;
   customStyle?: boolean;
 }
 
 const ScrollAnimator: React.FC<ScrollAnimatorProps> = ({
   children,
-  start = { opacity: 0, y: 30 },
-  end = { opacity: 1, y: 0 },
-  transition = { duration: 0.7, delay: 0.3 },
+  start = { opacity: 0, translateY: 30 },
+  end = { opacity: 1, translateY: 0 },
+  transition = {
+    transitionDelay: 0.2,
+    transitionDuration: 0.6,
+    transitionTimingFunction: 'ease-in-out',
+  },
   as = 'div',
   customStyle = false,
   ...props
@@ -58,12 +51,7 @@ const ScrollAnimator: React.FC<ScrollAnimatorProps> = ({
           {children}
         </Tag>
       ) : (
-        <Tag
-          ref={ref}
-          style={inlineStyle}
-          {...props}
-          data-is-active={inView}
-        >
+        <Tag ref={ref} style={inlineStyle} {...props} data-is-active={inView}>
           {children}
         </Tag>
       )}

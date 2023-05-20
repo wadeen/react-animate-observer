@@ -1,9 +1,10 @@
-export type StyleProps = TransformProps & TransitionProps & FilterProps;
+import { CSSProperties } from 'react';
 
+// Things not supported by CSSProperties
 export type TransformProps = Partial<{
-  x: number;
-  y: number;
-  z: number;
+  translateX: number;
+  translateY: number;
+  translateZ: number;
   rotateX: number;
   rotateY: number;
   rotateZ: number;
@@ -12,15 +13,15 @@ export type TransformProps = Partial<{
   scaleX: number;
   scaleY: number;
   scaleZ: number;
-  origin: 'left' | 'center' | 'right';
 }>;
 
 export type TransitionProps = Partial<{
-  delay: number;
-  duration: number;
-  timing: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear';
+  transitionDelay: number;
+  transitionDuration: number;
+  transitionProperty: CSSProperties['transitionProperty'];
+  transitionTimingFunction: CSSProperties['transitionTimingFunction'];
+  transition: CSSProperties['transition'];
 }>;
 
-export type FilterProps = Partial<{
-  opacity: number;
-}>;
+// base style props
+export type StyleProps = CSSProperties & TransformProps;
