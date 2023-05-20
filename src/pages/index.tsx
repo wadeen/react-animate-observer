@@ -7,8 +7,10 @@ export default function Home() {
       <h1 className={styles.title}>This is Test space</h1>
       <ScrollAnimator className={styles.div}>This is Div space</ScrollAnimator>
       <ScrollAnimator
-        start={{ opacity: 0, x: 30, y: 30, origin: 'left' }}
-        end={{ opacity: 1, x: 0, y: 0, origin: 'right' }}
+        // ToDo: transform まとめて書く
+        // ToDo: scaleとかの見直し(ReactのCSSPropertiesに合わせる必要あり)
+        start={{ opacity: 0, x: 30, y: 30, origin: 'left', rotateX: 100 }}
+        end={{ opacity: 1, x: 0, y: 0, origin: 'right', rotateX: 100 }}
         transition={{ duration: 0.7, delay: 0.3 }}
         className={styles.section}
       >
