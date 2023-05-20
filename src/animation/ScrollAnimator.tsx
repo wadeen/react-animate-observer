@@ -5,12 +5,13 @@ import {
   ReactNode,
   useState,
   useEffect,
+  CSSProperties,
 } from 'react';
 
 import { StyleProps, TransitionProps } from './types';
-import transformPropsToCSS from '../hooks/useTransformPropsToCSS';
+import transformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 
-export interface ScrollRevealProps extends HTMLAttributes<HTMLElement> {
+export interface ScrollAnimatorProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
   start?: Omit<StyleProps, keyof TransitionProps>;
   end?: Omit<StyleProps, keyof TransitionProps>;
@@ -18,7 +19,7 @@ export interface ScrollRevealProps extends HTMLAttributes<HTMLElement> {
   as?: keyof JSX.IntrinsicElements;
   customStyle?: boolean;
 }
-export const ScrollAnimator: React.FC<ScrollRevealProps> = ({
+const ScrollAnimator: React.FC<ScrollAnimatorProps> = ({
   children,
   start = { opacity: 0, y: 30 },
   end = { opacity: 1, y: 0 },
@@ -29,52 +30,29 @@ export const ScrollAnimator: React.FC<ScrollRevealProps> = ({
 }) => {
   const [ref, inView] = useIntersectionObserver();
   const Tag = as as ElementType;
-  const [animation, setAnimation] =
-    useState<Omit<StyleProps, keyof TransitionProps>>();
-  const [inlineStyle, setInlineStyle] = useState<string | string[]>('');
+  const [inlineStyle, setInlineStyle] = useState<CSSProperties>();
 
   // Confirm the props start or end
   useEffect(() => {
-    setAnimation(() => (inView ? end : start));
-    const transformProps = transformPropsToCSS({ transition, animation });
-    // setInlineStyle(transformProps);
-    console.log('inlineStyle: ', inlineStyle);
+    const animation = inView ? end : start;
+    const transformProps = transformPropsToCSS(transition, animation);
+    setInlineStyle(transformProps);
   }, [inView]);
 
+  console.log('inlineStyle: ', inlineStyle);
   return (
-    <Tag ref={ref} style={{ inlineStyle }} {...props} data-is-active={inView}>
-      {children}
-    </Tag>
+    <>
+      {customStyle ? (
+        <Tag ref={ref} {...props} data-is-active={inView}>
+          {children}
+        </Tag>
+      ) : (
+        <Tag ref={ref} style={inlineStyle} {...props} data-is-active={inView}>
+          {children}
+        </Tag>
+      )}
+    </>
   );
 };
 
-// function isCSSProperty(key: string): key is keyof CSSProperties {
-//   return key in ({} as CSSProperties);
-// }
-
-// if (transformProps.includes(key as keyof TransformProps)) {
-//   css.transform = `${css.transform || ''} ${key}(${
-//     props[key as keyof StyleProps]
-//   })`;
-// } else if (filterProps.includes(key as keyof FilterProps)) {
-//   css[key as keyof CSSProperties] = props[key as keyof StyleProps];
-// } else if (transitionProps.includes(key as keyof TransitionProps)) {
-//   css.transition = `${css.transition || ''} ${key} ${
-//     props[key as keyof StyleProps]
-//   }s`;
-// }
-
-// console.log('transition: ', transition);
-// console.log('animationStyles: ', animationStyles);
-// console.log('All, props: ', props);
-
-// for (const key in props) {
-//   if (props.transition) {
-//     console.log('Transition, props: ', props);
-//     // transitionのこと(duration, delay, timing)
-//     // setTransitionStyles(() => ["transformX"])
-//   } else {
-//     console.log('Animation, props: ', props);
-//     // start/endを使ったアニメーションの数値(transition以外全て)
-//   }
-// }
+export default ScrollAnimator;

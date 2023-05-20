@@ -1,5 +1,5 @@
 import styles from '@/styles/Home.module.css';
-import { ScrollAnimator } from '@/animation/ScrollAnimator';
+import ScrollAnimator from '@/animation/ScrollAnimator';
 
 export default function Home() {
   return (
@@ -14,10 +14,12 @@ export default function Home() {
       >
         This is Section space
       </ScrollAnimator>
-      <ScrollAnimator className={styles.div}>This is Div space</ScrollAnimator>
+      <ScrollAnimator customStyle={true} className={styles.div}>
+        This is Div space
+      </ScrollAnimator>
       <ScrollAnimator
         start={{ opacity: 0, skewX: 30, skewY: 30, rotateX: 180 }}
-        end={{ opacity: 1, skewX: 30, skewY: 30, rotateX: 0 }}
+        end={{ opacity: 1, skewX: 0, skewY: 0, rotateX: 0 }}
         transition={{ duration: 0.7, delay: 0.3, timing: 'ease-in-out' }}
         className={styles.section}
       >
