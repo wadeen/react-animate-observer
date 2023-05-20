@@ -52,4 +52,8 @@ export default function Home() {
  * 2. 数字と単位を分けるかどうか(number/string)
  * 3. 1回だけにするかどうかbooleanで
  * 4. 最初のアニメーション
+ * 5. JSDocの確認・修正
+ * 6. ReadMeの修正
+ * 7. デモページの作成
+ * 8. SPでの確認（）
  */

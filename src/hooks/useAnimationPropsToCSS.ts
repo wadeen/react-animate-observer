@@ -1,6 +1,18 @@
 import { StyleProps, TransitionProps } from '@/animation/types';
 import { CSSProperties } from 'react';
 
+/**
+ * Converts transition and animation properties to CSS.
+ *
+ * This function takes two parameters, `transition` and `animation`, which are objects representing
+ * transition and animation properties, respectively. It returns an object that maps these properties
+ * to their CSS equivalents.
+ *
+ * @param {TransitionProps} transition An object representing the transition properties.
+ * @param {Omit<StyleProps, keyof TransitionProps>} animation An object representing the animation properties, excluding those that are part of the transition properties.
+ * @returns {CSSProperties} An object that represents the CSS properties for the transition and animation.
+ */
+
 // Convert transform props to CSS
 const useTransformPropsToCSS = (
   transition: TransitionProps,
