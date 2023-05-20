@@ -1,12 +1,13 @@
 import { StyleProps, TransitionProps } from '@/animation/types';
+import { CSSProperties } from 'react';
 
 // Convert transform props to CSS
 const useTransformPropsToCSS = (
   transition: TransitionProps,
   animation: Omit<StyleProps, keyof TransitionProps>,
 ) => {
-  let transitionPropsArray: any[] = [];
-  // let animationPropsArray: string[] = [];
+  let transitionPropsArray: CSSProperties[] = [];
+  let animationPropsArray: CSSProperties[] = [];
 
   // Converting styles for transition
   Object.keys(transition).map((key) => {
@@ -34,32 +35,87 @@ const useTransformPropsToCSS = (
   });
 
   // Converting styles for animation
-  // Object.keys(animation).map((key) => {
-  //   // @ts-ignore
-  //   const value = animation[key];
-  //   switch (key) {
-  //     case 'opacity':
-  //       animationPropsArray.push(`opacity: '${value}';`);
-  //       break;
-  //     default:
-  //       return '';
-  //   }
-  // });
+  Object.keys(animation).map((key) => {
+    // @ts-ignore
+    const value = animation[key];
+    switch (key) {
+      case 'opacity':
+        animationPropsArray.push({
+          opacity: `${value}`,
+        });
+        break;
+      case 'x':
+        animationPropsArray.push({
+          transform: `translateX(${value}px)`,
+        });
+        break;
+      case 'y':
+        animationPropsArray.push({
+          transform: `translateY(${value}px)`,
+        });
+        break;
+      case 'z':
+        animationPropsArray.push({
+          transform: `translateZ(${value}px)`,
+        });
+        break;
+      case 'rotateX':
+        animationPropsArray.push({
+          transform: `rotateX(${value}deg)`,
+        });
+        break;
+      case 'rotateY':
+        animationPropsArray.push({
+          transform: `rotateY(${value}deg)`,
+        });
+        break;
+      case 'rotateZ':
+        animationPropsArray.push({
+          transform: `rotateZ(${value}deg)`,
+        });
+        break;
+      case 'skewX':
+        animationPropsArray.push({
+          transform: `skewX(${value}deg)`,
+        });
+        break;
+      case 'skewY':
+        animationPropsArray.push({
+          transform: `skewY(${value}deg)`,
+        });
+        break;
+      case 'scaleX':
+        animationPropsArray.push({
+          transform: `scaleX(${value})`,
+        });
+        break;
+      case 'scaleY':
+        animationPropsArray.push({
+          transform: `scaleY(${value})`,
+        });
+        break;
+      case 'scaleZ':
+        animationPropsArray.push({
+          transform: `scaleZ(${value})`,
+        });
+        break;
+      case 'origin':
+        animationPropsArray.push({
+          transformOrigin: `${value}`,
+        });
+        break;
+      default:
+        return '';
+    }
+  });
 
-  // const stylePropsArray: any = [
-  //   ...transitionPropsArray,
-  //   ...animationPropsArray,
-  // ];
+  const transitionPropsToCSS = Object.assign(
+    {},
+    ...transitionPropsArray,
+    ...animationPropsArray,
+  );
 
-  // const transformProps = stylePropsArray.split(';');
-
-  // const transformProps = {
-  //   ...transitionPropsArray,
-  // };
-
-  const transformProps = Object.assign({}, ...transitionPropsArray);
-
-  return transformProps;
+  return transitionPropsToCSS;
 };
 
 export default useTransformPropsToCSS;

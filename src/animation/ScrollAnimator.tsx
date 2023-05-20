@@ -39,7 +39,7 @@ const ScrollAnimator: React.FC<ScrollAnimatorProps> = ({
     setInlineStyle(transformProps);
   }, [inView]);
 
-  console.log('inlineStyle: ', inlineStyle);
+  // console.log('inlineStyle: ', inlineStyle);
   return (
     <>
       {customStyle ? (

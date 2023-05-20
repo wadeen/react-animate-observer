@@ -38,6 +38,27 @@ export default function Home() {
       >
         test space
       </div>
+      <hr />
+      <br />
+      <br />
+      <br />
+      <ScrollAnimator>
+        <img src="https://via.placeholder.com/400" alt="" />
+      </ScrollAnimator>
+      <br />
+      <br />
+      <ScrollAnimator>
+        <img src="https://via.placeholder.com/400" alt="" />
+      </ScrollAnimator>
+      <br />
+      <br />
+      <ScrollAnimator
+        start={{ opacity: 0, y: 130, skewX: 30 }}
+        end={{ opacity: 1, y: 0, skewX: 0 }}
+        transition={{ delay: 1, duration: 1, timing: 'ease-in-out' }}
+      >
+        <img src="https://via.placeholder.com/400" alt="" />
+      </ScrollAnimator>
     </div>
   );
 }
