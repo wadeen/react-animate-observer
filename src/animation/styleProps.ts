@@ -1,7 +1,7 @@
 import { FilterProps, TransformProps, TransitionProps } from './types';
 
 // Basic transform properties
-export const transformProps: Array<keyof TransformProps> = [
+export const transformProps: ReadonlyArray<keyof TransformProps> = [
   'x',
   'y',
   'z',
@@ -17,11 +17,11 @@ export const transformProps: Array<keyof TransformProps> = [
 ];
 
 // Basic transition properties
-export const transitionProps: Array<keyof TransitionProps> = [
+export const transitionProps: ReadonlyArray<keyof TransitionProps> = [
   'delay',
   'duration',
   'timing',
 ];
 
 // Basic filter properties
-export const filterProps: Array<keyof FilterProps> = ['opacity'];
+export const filterProps: ReadonlyArray<keyof FilterProps> = ['opacity'];

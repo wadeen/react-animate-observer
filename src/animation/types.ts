@@ -12,7 +12,7 @@ export type TransformProps = Partial<{
   scaleX: number;
   scaleY: number;
   scaleZ: number;
-  origin: 'left' | 'right' | 'center';
+  origin: 'left' | 'center' | 'right';
 }>;
 
 export type TransitionProps = Partial<{
@@ -24,9 +24,3 @@ export type TransitionProps = Partial<{
 export type FilterProps = Partial<{
   opacity: number;
 }>;
-
-type TransformPropsToCSS = {
-  // transition: ScrollRevealProps['transition'];
-  // animation: ScrollRevealProps['start'];
-  // animation: any;
-};

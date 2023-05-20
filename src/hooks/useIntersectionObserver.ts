@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 /**
  * A custom hook for observing if a DOM element is in the viewport.
  * The hook uses the "Intersection Observer API" to check if the element is in view.
- * @param {number} [width] - The minimum screen width where rootMargin changes. Default is 768px.
+ * @param {number} [mediaQueryWidth] - The minimum screen width where rootMargin changes. Default is 768px.
  * @param {string} [largeScreenRootMargin] - Screen minimum width root margin. Default works with 25% top and bottom margins
  * @param {string} [smallScreenRootMargin] - root margin of maximum screen width. Default works with 5% top and bottom margins
  * @returns {[(node: HTMLElement | null) => void, boolean]} - A tuple where the first element is a function to set the node to be observed,
@@ -11,7 +11,7 @@ import { useState, useEffect, useRef } from 'react';
  */
 
 const useIntersectionObserver = (
-  width?: number,
+  mediaQueryWidth?: number,
   largeScreenRootMargin?: string,
   smallScreenRootMargin?: string,
 ) => {
@@ -23,7 +23,7 @@ const useIntersectionObserver = (
   const observer = useRef<IntersectionObserver | null>(null);
 
   // Initial values
-  const mediaQueryString = `(min-width: ${width ?? 768}px)`;
+  const mediaQueryString = `(min-width: ${mediaQueryWidth ?? 768}px)`;
   const LargeScreenRootMargin = largeScreenRootMargin ?? '-25% 0px';
   const SmallScreenRootMargin = smallScreenRootMargin ?? '-5% 0px';
 
