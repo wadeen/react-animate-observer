@@ -1,13 +1,30 @@
 {
   "name": "react-animate-observer",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A React component for scroll animations using Intersection Observer",
+  "main": "entrypoint.ts",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wadeen/react-animate-observer.git"
+  },
+  "keywords": [
+    "react",
+    "animation",
+    "scroll",
+    "IntersectionObserver"
+  ],
+  "author": "wadeen <>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wadeen/react-animate-observer/issues"
+  },
+  "homepage": "https://github.com/wadeen/react-animate-observer#readme",
   "dependencies": {
     "@types/node": "20.1.7",
     "@types/react": "18.2.6",
