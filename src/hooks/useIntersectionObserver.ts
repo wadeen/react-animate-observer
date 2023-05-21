@@ -1,43 +1,47 @@
 import { useState, useEffect, useRef } from 'react';
 
-/**
- * A custom hook for observing if a DOM element is in the viewport.
- * The hook uses the "Intersection Observer API" to check if the element is in view.
- * @param {number} [mediaQueryWidth] - The minimum screen width where rootMargin changes. Default is 768px.
- * @param {string} [largeScreenRootMargin] - Screen minimum width root margin. Default works with 25% top and bottom margins
- * @param {string} [smallScreenRootMargin] - root margin of maximum screen width. Default works with 5% top and bottom margins
- * @returns {[(node: HTMLElement | null) => void, boolean]} - A tuple where the first element is a function to set the node to be observed,
- * and the second element is a boolean indicating whether the node is in view or not.
- */
+type IntersectionObserverProps = Partial<{
+  mediaQueryWidth?: number;
+  largeScreenRootMargin?: string;
+  smallScreenRootMargin?: string;
+  once?: boolean;
+}>;
 
-const useIntersectionObserver = (
-  mediaQueryWidth?: number,
-  largeScreenRootMargin?: string,
-  smallScreenRootMargin?: string,
-) => {
+const useIntersectionObserver = ({
+  mediaQueryWidth,
+  largeScreenRootMargin: _largeScreenRootMargin,
+  smallScreenRootMargin: _smallScreenRootMargin,
+  once,
+}: IntersectionObserverProps = {}) => {
   // State
   const [inView, setInView] = useState(false); // Check if DOM is in view
   const [node, setNode] = useState<HTMLElement | null>(null); // Check and get if DOM exists
+  // const [alreadyAnimated, setAlreadyAnimated] = useState(false); // For tracking if the animation has already been played
 
   // Ref: observer
   const observer = useRef<IntersectionObserver | null>(null);
 
   // Initial values
   const mediaQueryString = `(min-width: ${mediaQueryWidth ?? 768}px)`;
-  const LargeScreenRootMargin = largeScreenRootMargin ?? '-25% 0px';
-  const SmallScreenRootMargin = smallScreenRootMargin ?? '-5% 0px';
+  const largeScreenRootMargin = _largeScreenRootMargin ?? '-25% 0px';
+  const smallScreenRootMargin = _smallScreenRootMargin ?? '-5% 0px';
+  const onceAnimation = once ?? true;
 
   // Instantiate observer and set initial value
   const createObserver = () => {
     return new IntersectionObserver(
       ([entry]) => {
-        setInView(entry.isIntersecting);
+        if (onceAnimation) {
+          entry.isIntersecting && setInView(entry.isIntersecting);
+        } else {
+          setInView(entry.isIntersecting);
+        }
       },
       {
         rootMargin: window.matchMedia(mediaQueryString).matches
-          ? LargeScreenRootMargin
-          : SmallScreenRootMargin,
-        threshold: 0.1,
+          ? largeScreenRootMargin
+          : smallScreenRootMargin,
+        threshold: 0,
       },
     );
   };
@@ -48,6 +52,7 @@ const useIntersectionObserver = (
     observer.current = createObserver(); // add IntersectionObserver
     if (node) observer.current.observe(node);
     return () => observer?.current?.disconnect();
+    // }, [node, alreadyAnimated]);
   }, [node]);
 
   // Update root margin on screen resize
@@ -61,6 +66,8 @@ const useIntersectionObserver = (
     };
 
     updateRootMargin(); // Initialization
+
+    // Relative to device width specified in `mediaQueryString`
     const mediaQueryList = window.matchMedia(mediaQueryString);
     mediaQueryList.addEventListener('change', updateRootMargin);
 

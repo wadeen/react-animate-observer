@@ -41,6 +41,7 @@ type ScrollAnimatorProps<T extends keyof JSX.IntrinsicElements> =
  * @param {ScrollAnimatorProps} props The properties of the ScrollAnimator.
  * @returns {React.ReactElement} The rendered ScrollAnimator component.
  */
+
 const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   children,
   start = { opacity: 0, translateY: 30 },
@@ -48,17 +49,26 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   transition = {
     transitionDelay: 0.2,
     transitionDuration: 0.6,
-    transitionTimingFunction: 'ease-in-out',
+    transitionTimingFunction: 'ease-in',
   },
   as = 'div' as T,
   customStyle = false,
   ...props
 }: ScrollAnimatorProps<T>): ReactElement => {
-  const [ref, inView] = useIntersectionObserver(); // ref = setNode
+  /**
+   * Options passed to the `IntersectionObserver`
+   */
+  const [ref, inView] = useIntersectionObserver({
+    mediaQueryWidth: 768,
+    largeScreenRootMargin: '-25% 0px',
+    smallScreenRootMargin: '-5% 0px',
+    once: true,
+  }); // ref = setNode
+
   const Tag = as as ElementType;
   const [inlineStyle, setInlineStyle] = useState<CSSProperties>();
 
-  // Monitor "inView" and convert styles
+  // Monitor `inView` and convert styles
   useEffect(() => {
     const animation = inView ? end : start;
     const transformProps = transformPropsToCSS(transition, animation);
@@ -68,11 +78,11 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   return (
     <>
       {customStyle ? (
-        <Tag ref={ref} {...props} data-is-active={inView}>
+        <Tag ref={ref} data-is-active={inView} {...props}>
           {children}
         </Tag>
       ) : (
-        <Tag ref={ref} style={inlineStyle} {...props} data-is-active={inView}>
+        <Tag ref={ref} style={inlineStyle} data-is-active={inView} {...props}>
           {children}
         </Tag>
       )}
