@@ -1,5 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 
+/**
+ * @typedef {Object} IntersectionObserverProps
+ * @property {number} [mediaQueryWidth] - The minimum viewport width in pixels.
+ * @property {string} [largeScreenRootMargin] - The root margin to use when the viewport width is greater than or equal to mediaQueryWidth.
+ * @property {string} [smallScreenRootMargin] - The root margin to use when the viewport width is less than mediaQueryWidth.
+ * @property {boolean} [once] - Whether to only update the inView state once when the observed element enters the viewport.
+ */
+
+/**
+ * A custom React Hook that uses the Intersection Observer API to track whether an element is within the viewport.
+ *
+ * @param {IntersectionObserverProps} [options={}] - The options to configure the intersection observer and viewport width.
+ * @returns {Function[]} - A tuple where the first element is a function to set the node to observe and the second element is a boolean indicating whether the observed node is in the viewport.
+ */
+
 type IntersectionObserverProps = Partial<{
   mediaQueryWidth?: number;
   largeScreenRootMargin?: string;
@@ -16,7 +31,6 @@ const useIntersectionObserver = ({
   // State
   const [inView, setInView] = useState(false); // Check if DOM is in view
   const [node, setNode] = useState<HTMLElement | null>(null); // Check and get if DOM exists
-  // const [alreadyAnimated, setAlreadyAnimated] = useState(false); // For tracking if the animation has already been played
 
   // Ref: observer
   const observer = useRef<IntersectionObserver | null>(null);
@@ -52,7 +66,6 @@ const useIntersectionObserver = ({
     observer.current = createObserver(); // add IntersectionObserver
     if (node) observer.current.observe(node);
     return () => observer?.current?.disconnect();
-    // }, [node, alreadyAnimated]);
   }, [node]);
 
   // Update root margin on screen resize

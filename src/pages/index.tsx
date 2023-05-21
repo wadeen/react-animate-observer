@@ -55,7 +55,6 @@ export default function Home() {
 /**
  * ToDo:
  * 4. 最初のアニメーション
- * 5. JSDocの確認・修正
  * 6. ReadMeの修正
  * 7. デモページの作成
  * 8. SPでの確認（）
