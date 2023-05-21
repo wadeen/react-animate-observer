@@ -1,38 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Animate Observer 🕹️
 
-## Getting Started
+React Animate Observer は React のカスタムフックを使用した Intersection Observer ライブラリで、スクロールによって要素がビューポートに入るときにアニメーションをトリガーします。
 
-First, run the development server:
+## インストール
+
+以下のコマンドを使用して React Animate Observer をプロジェクトにインストールします。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# 準備中
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 使い方
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+基本的な使用方法は以下の通りです。
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```jsx
+import ScrollAnimator from 'react-animate-observer';
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+const YourComponent = () => {
+  return (
+    <ScrollAnimator
+      start={{ opacity: 0, translateY: 40 }}
+      end={{ opacity: 1, translateY: 0 }}
+      transition={{
+        transitionDelay: 0.4,
+        transitionDuration: 0.8,
+        transitionTimingFunction: 'ease-in-out',
+      }}
+    >
+      <div>Your content goes here</div>
+    </ScrollAnimator>
+  );
+};
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+上記の例では、スクロールがビューポートに入るときにアニメーションがトリガーされます。
 
-## Learn More
+## Props
 
-To learn more about Next.js, take a look at the following resources:
+以下の props を ScrollAnimator に渡すことができます。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+# start:
+アニメーションの初期状態を定義します。このプロパティは、CSSのスタイルオブジェクトを受け入れます。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# end:
+アニメーションの終了状態を定義します。このプロパティは、CSSのスタイルオブジェクトを受け入れます。
 
-## Deploy on Vercel
+# transition:
+アニメーションの遷移プロパティを定義します。このプロパティは、CSSのトランジションプロパティを受け入れます。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# as:
+描画するHTML要素を定義します。デフォルトはdivです。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# customStyle:
+customStyleをtrueにすることで`start`/`end`/`transition`の初期値をなくすことができます(デフォルトはfalse)。
+```
+
+## カスタム HTML 要素の使用
+
+`as` prop を使用して任意の HTML 要素を描画することができます。
+
+```jsx
+<ScrollAnimator as="section">
+  <p>Your content goes here</p>
+</ScrollAnimator>
+```
+
+上記の例では、section 要素がアニメーションの対象となります。<br />
+また、`start` / `end` / `transition`を渡さければデフォルトのアニメーションが実行されます（デフォルトの値も変更可能）。
+
+## データ属性の自動付与
+
+このライブラリは、要素がビューポートに入ると`data-is-active`属性が true になります。<br />
+これにより、CSS または JavaScript でアニメーションをフックすることが容易になります。<br />
+要素がビューポートから外れると、この属性は`false`になります。
+
+## 今後の計画
+
+React Animate Observer は現在開発中であり、今後も機能が追加される予定です。<br />
+フィードバックや提案がありましたら、ぜひ GitHub の issue を通じてお知らせください。

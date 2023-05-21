@@ -51,11 +51,3 @@ export default function Home() {
     </div>
   );
 }
-
-/**
- * ToDo:
- * 4. 最初のアニメーション
- * 6. ReadMeの修正
- * 7. デモページの作成
- * 8. SPでの確認（）
- */
