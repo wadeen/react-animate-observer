@@ -25,6 +25,12 @@ export default function Home() {
       <ScrollAnimator as="section" className={styles.section}>
         ああ
       </ScrollAnimator>
+      <ScrollAnimator as="a" href="/" className={styles.section}>
+        リンク
+      </ScrollAnimator>
+      <ScrollAnimator as="button" type="button" className={styles.section}>
+        ボタン
+      </ScrollAnimator>
       <div
         style={{
           width: '800px',
@@ -48,8 +54,6 @@ export default function Home() {
 
 /**
  * ToDo:
- * 1. X/yなどの簡易表記にするかどうか
- * 2. 数字と単位を分けるかどうか(number/string)
  * 3. 1回だけにするかどうかbooleanで
  * 4. 最初のアニメーション
  * 5. JSDocの確認・修正

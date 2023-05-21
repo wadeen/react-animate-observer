@@ -17,7 +17,7 @@ import { CSSProperties } from 'react';
 const useTransformPropsToCSS = (
   transition: TransitionProps,
   animation: Omit<StyleProps, keyof TransitionProps>,
-) => {
+): CSSProperties => {
   let transitionPropsArray: CSSProperties[] = [];
   let transformPropsArray: CSSProperties[] = [];
 
@@ -49,7 +49,7 @@ const useTransformPropsToCSS = (
   ).forEach((key) => {
     const value = animation[key];
     switch (key) {
-      // Transform props: "Self-made" because it is not in CSSProperties
+      // Transform props: `Self-made` because it is not in CSSProperties
       case 'translateX':
         animationProps += `translateX(${value}px)`;
         break;

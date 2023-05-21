@@ -1,11 +1,11 @@
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import {
-  HTMLAttributes,
   ElementType,
   ReactNode,
   useState,
   useEffect,
   CSSProperties,
+  ReactElement,
 } from 'react';
 
 import { StyleProps, TransitionProps } from './types';
@@ -14,7 +14,7 @@ import transformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 /**
  * The properties that the ScrollAnimator component expects.
  */
-export interface ScrollAnimatorProps extends HTMLAttributes<HTMLElement> {
+interface BaseScrollAnimatorProps {
   /** The children to render inside the ScrollAnimator. */
   children: ReactNode;
   /** The starting styles for the animation. */
@@ -23,11 +23,15 @@ export interface ScrollAnimatorProps extends HTMLAttributes<HTMLElement> {
   end?: Omit<StyleProps, keyof TransitionProps>;
   /** The transition properties for the animation. */
   transition?: TransitionProps;
-  /** The HTML element to render as. */
-  as?: keyof JSX.IntrinsicElements;
   /** Whether to use custom styling or not. */
   customStyle?: boolean;
 }
+
+type ScrollAnimatorProps<T extends keyof JSX.IntrinsicElements> =
+  BaseScrollAnimatorProps & {
+    /** The HTML element to render as. */
+    as?: T;
+  } & JSX.IntrinsicElements[T];
 
 /**
  * ScrollAnimator component. This component is used to animate its children on scroll.
@@ -37,7 +41,7 @@ export interface ScrollAnimatorProps extends HTMLAttributes<HTMLElement> {
  * @param {ScrollAnimatorProps} props The properties of the ScrollAnimator.
  * @returns {React.ReactElement} The rendered ScrollAnimator component.
  */
-const ScrollAnimator: React.FC<ScrollAnimatorProps> = ({
+const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   children,
   start = { opacity: 0, translateY: 30 },
   end = { opacity: 1, translateY: 0 },
@@ -46,10 +50,10 @@ const ScrollAnimator: React.FC<ScrollAnimatorProps> = ({
     transitionDuration: 0.6,
     transitionTimingFunction: 'ease-in-out',
   },
-  as = 'div',
+  as = 'div' as T,
   customStyle = false,
   ...props
-}: ScrollAnimatorProps): React.ReactElement => {
+}: ScrollAnimatorProps<T>): ReactElement => {
   const [ref, inView] = useIntersectionObserver(); // ref = setNode
   const Tag = as as ElementType;
   const [inlineStyle, setInlineStyle] = useState<CSSProperties>();
