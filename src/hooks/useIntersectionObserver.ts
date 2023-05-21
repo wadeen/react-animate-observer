@@ -16,10 +16,10 @@ import { useState, useEffect, useRef } from 'react';
  */
 
 type IntersectionObserverProps = Partial<{
-  mediaQueryWidth?: number;
-  largeScreenRootMargin?: string;
-  smallScreenRootMargin?: string;
-  once?: boolean;
+  mediaQueryWidth: number;
+  largeScreenRootMargin: string;
+  smallScreenRootMargin: string;
+  once: boolean;
 }>;
 
 const useIntersectionObserver = ({

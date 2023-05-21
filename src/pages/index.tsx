@@ -7,8 +7,6 @@ export default function Home() {
       <h1 className={styles.title}>This is Demo space</h1>
       <ScrollAnimator className={styles.space}>space</ScrollAnimator>
       <ScrollAnimator className={styles.space}>space</ScrollAnimator>
-      <ScrollAnimator className={styles.space}>space</ScrollAnimator>
-      <ScrollAnimator className={styles.space}>space</ScrollAnimator>
       <ScrollAnimator
         as="section"
         className={styles.space}
@@ -31,7 +29,7 @@ export default function Home() {
         end={{ opacity: 1, skewX: 0, skewY: 0 }}
         transition={{
           transition: 'opacity .3s ease, transform .4s ease-in',
-          transitionDelay: 0.3,
+          transitionDelay: 0.6,
         }}
       >
         space
@@ -42,6 +40,11 @@ export default function Home() {
       >
         space
       </ScrollAnimator>
+      <div
+        style={{
+          transitionDuration: '0.4s',
+        }}
+      ></div>
     </main>
   );
 }

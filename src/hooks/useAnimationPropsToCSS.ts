@@ -1,52 +1,40 @@
 import { StyleProps, TransitionProps } from '@/animation/types';
 import { CSSProperties } from 'react';
 
-/**
- * Converts transition and animation properties to CSS.
- *
- * This function takes two parameters, `transition` and `animation`, which are objects representing
- * transition and animation properties, respectively. It returns an object that maps these properties
- * to their CSS equivalents.
- *
- * @param {TransitionProps} transition An object representing the transition properties.
- * @param {Omit<StyleProps, keyof TransitionProps>} animation An object representing the animation properties, excluding those that are part of the transition properties.
- * @returns {CSSProperties} An object that represents the CSS properties for the transition and animation.
- */
-
-// Convert transform props to CSS
 const useTransformPropsToCSS = (
   transition: TransitionProps,
   animation: Omit<StyleProps, keyof TransitionProps>,
 ): CSSProperties => {
-  let transitionPropsArray: CSSProperties[] = [];
-  let transformPropsArray: CSSProperties[] = [];
+  let transitionProps: CSSProperties = {};
+  let transformProps: CSSProperties = {};
+  let animationProps = '';
 
   // Converting styles for transition
   (Object.keys(transition) as Array<keyof TransitionProps>).forEach((key) => {
     const value = transition[key];
     switch (key) {
       case 'transitionDelay':
-        transitionPropsArray.push({
+        transitionProps = {
+          ...transitionProps,
           transitionDelay: `${value}s`,
-        });
+        };
         break;
       case 'transitionDuration':
-        transitionPropsArray.push({
+        transitionProps = {
+          ...transitionProps,
           transitionDuration: `${value}s`,
-        });
-        break;
-      case 'transition':
-        transitionPropsArray.push({
-          transition: `${value}`,
-        });
+        };
         break;
       default:
-        return '';
+        transitionProps = {
+          ...transitionProps,
+          [key]: `${value}`,
+        };
+        return;
     }
   });
 
   // Converting styles for animation
-  let animationProps = '';
   (
     Object.keys(animation) as Array<
       keyof Omit<StyleProps, keyof TransitionProps>
@@ -56,57 +44,48 @@ const useTransformPropsToCSS = (
     switch (key) {
       // Transform props: `Self-made` because it is not in CSSProperties
       case 'translateX':
-        animationProps += `translateX(${value}px)`;
+        animationProps += `translateX(${value}px) `;
         break;
       case 'translateY':
-        animationProps += `translateY(${value}px)`;
+        animationProps += `translateY(${value}px) `;
         break;
       case 'translateZ':
-        animationProps += `translateZ(${value}px)`;
+        animationProps += `translateZ(${value}px) `;
         break;
       case 'rotateX':
-        animationProps += `rotateX(${value}deg)`;
+        animationProps += `rotateX(${value}deg) `;
         break;
       case 'rotateY':
-        animationProps += `rotateY(${value}deg)`;
+        animationProps += `rotateY(${value}deg) `;
         break;
       case 'rotateZ':
-        animationProps += `rotateZ(${value}deg)`;
+        animationProps += `rotateZ(${value}deg) `;
         break;
       case 'skewX':
-        animationProps += `skewX(${value}deg)`;
+        animationProps += `skewX(${value}deg) `;
         break;
       case 'skewY':
-        animationProps += `skewY(${value}deg)`;
+        animationProps += `skewY(${value}deg) `;
         break;
       case 'scaleX':
-        animationProps += `scaleX(${value})`;
+        animationProps += `scaleX(${value}) `;
         break;
       case 'scaleY':
-        animationProps += `scaleY(${value})`;
+        animationProps += `scaleY(${value}) `;
         break;
       case 'scaleZ':
-        animationProps += `scaleZ(${value})`;
+        animationProps += `scaleZ(${value}) `;
         break;
-
       // Default style props
       default:
-        transformPropsArray.push({ [key]: `${value}` });
-        return '';
+        transformProps = { ...transformProps, [key]: `${value}` };
+        return;
     }
   });
 
-  transformPropsArray.push({
-    transform: animationProps,
-  });
+  transformProps = { ...transformProps, transform: animationProps.trim() };
 
-  const transformPropsToCSS = Object.assign(
-    {},
-    ...transitionPropsArray,
-    ...transformPropsArray,
-  );
-
-  return transformPropsToCSS;
+  return { ...transitionProps, ...transformProps };
 };
 
 export default useTransformPropsToCSS;

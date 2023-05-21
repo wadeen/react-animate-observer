@@ -9,7 +9,7 @@ import {
 } from 'react';
 
 import { StyleProps, TransitionProps } from './types';
-import transformPropsToCSS from '../hooks/useAnimationPropsToCSS';
+import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 
 /**
  * The properties that the ScrollAnimator component expects.
@@ -47,10 +47,9 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   start = { opacity: 0, translateY: 30 },
   end = { opacity: 1, translateY: 0 },
   transition = {
-    transitionDelay: 0.2,
-    transitionDuration: 0.6,
+    transitionDelay: 0.1,
+    transitionDuration: 0.4,
     transitionTimingFunction: 'ease-in',
-    transitionProperty: 'opacity',
   },
   as = 'div' as T,
   customStyle = false,
@@ -61,18 +60,20 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
    */
   const [ref, inView] = useIntersectionObserver({
     mediaQueryWidth: 768,
-    largeScreenRootMargin: '-25% 0px',
+    largeScreenRootMargin: '-35% 0px',
     smallScreenRootMargin: '-25% 0px',
     once: true,
   }); // ref = setNode
 
   const Tag = as as ElementType;
-  const [inlineStyle, setInlineStyle] = useState<CSSProperties>();
+  const [inlineStyle, setInlineStyle] = useState<CSSProperties>(
+    useTransformPropsToCSS(transition, start),
+  );
 
   // Monitor `inView` and convert styles
   useEffect(() => {
     const animation = inView ? end : start;
-    const transformProps = transformPropsToCSS(transition, animation);
+    const transformProps = useTransformPropsToCSS(transition, animation);
     setInlineStyle(transformProps);
   }, [inView]);
 

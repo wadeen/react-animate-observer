@@ -1,7 +1,7 @@
 .wrapper {
   width: min(100%, 900px);
   margin-inline: auto;
-  margin-block: 3vh;
+  margin-block: 3vh 30vh;
   border: 1px solid #333;
   text-align: center;
   overflow: hidden;
