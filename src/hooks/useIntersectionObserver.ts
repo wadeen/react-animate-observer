@@ -37,8 +37,8 @@ const useIntersectionObserver = ({
 
   // Initial values
   const mediaQueryString = `(min-width: ${mediaQueryWidth ?? 768}px)`;
-  const largeScreenRootMargin = _largeScreenRootMargin ?? '-25% 0px';
-  const smallScreenRootMargin = _smallScreenRootMargin ?? '-5% 0px';
+  const largeScreenRootMargin = _largeScreenRootMargin ?? '-25% 0px'; // PC
+  const smallScreenRootMargin = _smallScreenRootMargin ?? '-25% 0px'; // Mobile
   const onceAnimation = once ?? true;
 
   // Instantiate observer and set initial value

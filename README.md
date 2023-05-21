@@ -34,7 +34,15 @@ const YourComponent = () => {
 };
 ```
 
-上記の例では、スクロールがビューポートに入るときにアニメーションがトリガーされます。
+上記の例では、スクロールがビューポートに入るときにアニメーションがトリガーされます。<br />
+通常は、`CSSProperties` を継承しているので React での`style={}`と同じように使えます。<br />
+`transition`のプロパティごとに値を変えたい場合は、基本通り`transition`で動きます。<br />
+ただし、`translateY`や`scaleY`などはセルフメイドのため `transform` として指定してください。<br />
+詳細な設定がしたい場合は CSS でカスタマイズしてください。
+
+```jsx
+ transition: 'opacity .3s ease, transform .5s ease',
+```
 
 ## Props
 
@@ -68,15 +76,15 @@ customStyleをtrueにすることで`start`/`end`/`transition`の初期値をな
 ```
 
 上記の例では、section 要素がアニメーションの対象となります。<br />
-また、`start` / `end` / `transition`を渡さければデフォルトのアニメーションが実行されます（デフォルトの値も変更可能）。
+また、`start` / `end` / `transition`を渡さなければデフォルトのアニメーションが実行されます（デフォルトの値も変更可能）。
 
 ## データ属性の自動付与
 
-このライブラリは、要素がビューポートに入ると`data-is-active`属性が true になります。<br />
+このライブラリは、要素がビューポートに入ると`data-is-active`属性が `true` になります。<br />
 これにより、CSS または JavaScript でアニメーションをフックすることが容易になります。<br />
 要素がビューポートから外れると、この属性は`false`になります。
 
 ## 今後の計画
 
 React Animate Observer は現在開発中であり、今後も機能が追加される予定です。<br />
-フィードバックや提案がありましたら、ぜひ GitHub の issue を通じてお知らせください。
+フィードバックや提案がありましたら、ぜひ GitHub の [Issues](https://github.com/wadeen/react-animate-observer/issues) を通じてお知らせください。

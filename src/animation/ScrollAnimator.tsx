@@ -50,6 +50,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
     transitionDelay: 0.2,
     transitionDuration: 0.6,
     transitionTimingFunction: 'ease-in',
+    transitionProperty: 'opacity',
   },
   as = 'div' as T,
   customStyle = false,
@@ -61,7 +62,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   const [ref, inView] = useIntersectionObserver({
     mediaQueryWidth: 768,
     largeScreenRootMargin: '-25% 0px',
-    smallScreenRootMargin: '-5% 0px',
+    smallScreenRootMargin: '-25% 0px',
     once: true,
   }); // ref = setNode
 

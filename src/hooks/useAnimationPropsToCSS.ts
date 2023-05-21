@@ -35,6 +35,11 @@ const useTransformPropsToCSS = (
           transitionDuration: `${value}s`,
         });
         break;
+      case 'transition':
+        transitionPropsArray.push({
+          transition: `${value}`,
+        });
+        break;
       default:
         return '';
     }
