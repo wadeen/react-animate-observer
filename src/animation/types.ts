@@ -23,5 +23,12 @@ export type TransitionProps = Partial<{
   transition: CSSProperties['transition'];
 }>;
 
+export type IntersectionObserverProps = Partial<{
+  mediaQueryWidth: number;
+  largeScreenRootMargin: string;
+  smallScreenRootMargin: string;
+  once: boolean;
+}>;
+
 // base style props
 export type StyleProps = CSSProperties & TransformProps;

@@ -1,5 +1,6 @@
 import React from 'react';
 import ScrollAnimator from '@/animation/ScrollAnimator';
+import { observerOptions } from '@/constants/optionObserver';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         space
       </ScrollAnimator>
       <ScrollAnimator
+        observerOptions={observerOptions}
         as="article"
         className="space"
         start={{ opacity: 0, translateX: -100 }}

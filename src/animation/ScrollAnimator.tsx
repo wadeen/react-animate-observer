@@ -9,14 +9,18 @@ import {
   ReactElement,
 } from 'react';
 
-import { StyleProps, TransitionProps } from './types';
+import {
+  IntersectionObserverProps,
+  StyleProps,
+  TransitionProps,
+} from './types';
 import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 
 /**
- * The properties that the ScrollAnimator component expects.
+ * The properties expected by the ScrollAnimator component.
  */
 interface BaseScrollAnimatorProps {
-  /** The children to render inside the ScrollAnimator. */
+  /** The children to be rendered inside the ScrollAnimator. */
   children: ReactNode;
   /** The starting styles for the animation. */
   start?: Omit<StyleProps, keyof TransitionProps>;
@@ -24,8 +28,10 @@ interface BaseScrollAnimatorProps {
   end?: Omit<StyleProps, keyof TransitionProps>;
   /** The transition properties for the animation. */
   transition?: TransitionProps;
-  /** Whether to use custom styling or not. */
+  /** Whether or not to use custom styling. */
   customStyle?: boolean;
+  /** Options for the IntersectionObserver. */
+  observerOptions?: IntersectionObserverProps;
 }
 
 type ScrollAnimatorProps<T extends keyof JSX.IntrinsicElements> =
@@ -37,7 +43,7 @@ type ScrollAnimatorProps<T extends keyof JSX.IntrinsicElements> =
 /**
  * ScrollAnimator component. This component is used to animate its children on scroll.
  * It observes whether its root element is in the viewport and applies the appropriate
- * CSS transformation based on its `start` and `end` properties.
+ * CSS transformations based on its `start` and `end` properties.
  *
  * @param {ScrollAnimatorProps} props The properties of the ScrollAnimator.
  * @returns {React.ReactElement} The rendered ScrollAnimator component.
@@ -54,6 +60,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   },
   as = 'div' as T,
   customStyle = false,
+  observerOptions = {},
   ...props
 }: ScrollAnimatorProps<T>): ReactElement => {
   /**
@@ -64,6 +71,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
     largeScreenRootMargin: '-35% 0px',
     smallScreenRootMargin: '-25% 0px',
     once: true,
+    ...observerOptions,
   }); // ref = setNode
 
   const Tag = as as ElementType;
