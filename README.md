@@ -7,7 +7,11 @@ React Animate Observer は React のカスタムフックを使用した Interse
 以下のコマンドを使用して React Animate Observer をプロジェクトにインストールします。
 
 ```bash
-# 準備中
+  // npm
+  npm install react-animate-observer
+
+  // yarn
+  yarn add react-animate-observer
 ```
 
 ## 使い方
@@ -63,7 +67,43 @@ const YourComponent = () => {
 
 # customStyle:
 customStyleをtrueにすることで`start`/`end`/`transition`の初期値をなくすことができます(デフォルトはfalse)。
+
+# observerOptions
+オブザーバーの設定値を変更できます。詳細は次の項目をご覧ください。
 ```
+
+## observerOptions
+
+オブザーバーの設定値を変更するためのオブジェクトです。<br />
+デフォルトの値は以下のようになっています。
+
+```jsx
+  mediaQueryWidth: 768, // min-width()の値になります
+  largeScreenRootMargin: '-35% 0px', // PCサイズのルートマージン
+  smallScreenRootMargin: '-25% 0px', // Mobileサイズのルートマージン
+  once: true // アニメーションを1回のみ実行するか
+```
+
+これらの値を変更したい場合は`observerOptions`でオブジェクトを渡してください。<br />
+例えば、`src > constants > optionObserver.ts`を作成します。
+```jsx
+export const observerOptions = {
+  mediaQueryWidth: 820,
+  largeScreenRootMargin: '30% 0px',
+  smallScreenRootMargin: '-20% 0px',
+  once: false,
+};
+```
+あとはインポートして呼び出す際にpropsとして渡してください。
+```jsx
+  <ScrollAnimator
+    observerOptions={observerOptions}
+    customStyle={true}
+  >
+    <div>Your content goes here</div>
+  </ScrollAnimator>
+```
+また、先述していますが`customStyle`を`true`にすることで初期値をなくすことが可能です。
 
 ## カスタム HTML 要素の使用
 
@@ -76,7 +116,7 @@ customStyleをtrueにすることで`start`/`end`/`transition`の初期値をな
 ```
 
 上記の例では、section 要素がアニメーションの対象となります。<br />
-また、`start` / `end` / `transition`を渡さなければデフォルトのアニメーションが実行されます（デフォルトの値も変更可能）。
+また、`start` / `end` / `transition`を渡さなければデフォルトのアニメーションが実行されます。
 
 ## データ属性の自動付与
 
