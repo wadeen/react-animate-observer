@@ -6,7 +6,6 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "node",
@@ -15,12 +14,13 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": "./",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "paths": {
       "@/*": ["src/*"]
     }
   },
   "include": ["src"],
   "exclude": ["node_modules"],
-  "sourceDir": "src",
-  "outDir": "dist"
+  "sourceDir": "./src"
 }
