@@ -27,6 +27,7 @@ export type IntersectionObserverProps = Partial<{
   mediaQueryWidth: number;
   largeScreenRootMargin: string;
   smallScreenRootMargin: string;
+  threshold: number;
   once: boolean;
 }>;
 

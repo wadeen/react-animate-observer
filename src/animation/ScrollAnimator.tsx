@@ -70,6 +70,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
     mediaQueryWidth: 768,
     largeScreenRootMargin: '-35% 0px',
     smallScreenRootMargin: '-25% 0px',
+    threshold: 0,
     once: true,
     ...observerOptions,
   }); // ref = setNode

@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
  * @property {number} [mediaQueryWidth] - The minimum viewport width in pixels.
  * @property {string} [largeScreenRootMargin] - The root margin to use when the viewport width is greater than or equal to mediaQueryWidth.
  * @property {string} [smallScreenRootMargin] - The root margin to use when the viewport width is less than mediaQueryWidth.
+ * @property {number} [threshold] - A number indicating at what percentage of the target's visibility the observer's callback should be executed.
  * @property {boolean} [once] - Whether to only update the inView state once when the observed element enters the viewport.
  */
 
@@ -13,6 +14,7 @@ const useIntersectionObserver = ({
   mediaQueryWidth,
   largeScreenRootMargin: _largeScreenRootMargin,
   smallScreenRootMargin: _smallScreenRootMargin,
+  threshold: _threshold,
   once,
 }: IntersectionObserverProps) => {
   // State
@@ -27,6 +29,7 @@ const useIntersectionObserver = ({
   const largeScreenRootMargin = _largeScreenRootMargin ?? '-35% 0px'; // PC
   const smallScreenRootMargin = _smallScreenRootMargin ?? '-25% 0px'; // Mobile
   const onceAnimation = once ?? true;
+  const threshold = _threshold ?? 0;
 
   // Instantiate observer and set initial value
   const createObserver = () => {
@@ -42,7 +45,7 @@ const useIntersectionObserver = ({
         rootMargin: window.matchMedia(mediaQueryString).matches
           ? largeScreenRootMargin
           : smallScreenRootMargin,
-        threshold: 0,
+        threshold,
       },
     );
   };

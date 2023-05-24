@@ -81,28 +81,31 @@ customStyleをtrueにすることで`start`/`end`/`transition`の初期値をな
   mediaQueryWidth: 768, // min-width()の値になります
   largeScreenRootMargin: '-35% 0px', // PCサイズのルートマージン
   smallScreenRootMargin: '-25% 0px', // Mobileサイズのルートマージン
+  threshold: 0, // 閾値
   once: true // アニメーションを1回のみ実行するか
 ```
 
 これらの値を変更したい場合は`observerOptions`でオブジェクトを渡してください。<br />
 例えば、`src > constants > optionObserver.ts`を作成します。
+
 ```jsx
 export const observerOptions = {
   mediaQueryWidth: 820,
   largeScreenRootMargin: '30% 0px',
   smallScreenRootMargin: '-20% 0px',
+  threshold: 0.5,
   once: false,
 };
 ```
-あとはインポートして呼び出す際にpropsとして渡してください。
+
+あとはインポートして呼び出す際に props として渡してください。
+
 ```jsx
-  <ScrollAnimator
-    observerOptions={observerOptions}
-    customStyle={true}
-  >
-    <div>Your content goes here</div>
-  </ScrollAnimator>
+<ScrollAnimator observerOptions={observerOptions} customStyle={true}>
+  <div>Your content goes here</div>
+</ScrollAnimator>
 ```
+
 また、先述していますが`customStyle`を`true`にすることで初期値をなくすことが可能です。
 
 ## カスタム HTML 要素の使用
