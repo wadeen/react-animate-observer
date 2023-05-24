@@ -1,5 +1,5 @@
 import React from 'react';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import useIntersectionObserver from '../hooks/useIntersectionObserver.js';
 import {
   ElementType,
   ReactNode,
@@ -13,8 +13,8 @@ import {
   IntersectionObserverProps,
   StyleProps,
   TransitionProps,
-} from './types';
-import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS';
+} from '../animation/types.js';
+import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS.js';
 
 /**
  * The properties expected by the ScrollAnimator component.
