@@ -11,11 +11,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "incremental": true,
     "baseUrl": "./",
     "rootDir": "./src",
     "outDir": "./dist",
+    "declaration": true,
     "paths": {
       "@/*": ["src/*"]
     }

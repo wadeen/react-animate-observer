@@ -1,4 +1,4 @@
-import { StyleProps, TransitionProps } from '@/animation/types';
+import { StyleProps, TransitionProps } from '../animation/types';
 import { CSSProperties } from 'react';
 
 const useTransformPropsToCSS = (
