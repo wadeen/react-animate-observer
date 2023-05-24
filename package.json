@@ -28,14 +28,6 @@
   },
   "homepage": "https://github.com/wadeen/react-animate-observer#readme",
   "dependencies": {
-    "@babel/core": "^7.21.8",
-    "@babel/preset-env": "^7.21.5",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.5",
-    "@rollup/plugin-commonjs": "^25.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.2",
-    "@rollup/plugin-typescript": "^11.1.1",
     "@types/node": "20.1.7",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -44,15 +36,9 @@
     "next": "13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
     "typescript": "5.0.4"
   },
-  "devDependencies": {
-    "@rollup/plugin-alias": "^5.0.0",
-    "@rollup/plugin-babel": "^6.0.3",
-    "rollup": "^3.22.0"
-  },
+  "devDependencies": {},
   "files": [
     "dist"
   ]
