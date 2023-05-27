@@ -3,11 +3,13 @@
  * and scoped locally.
  */
 
-.heroBanner {
+.container {
+  display: grid;
+  place-content: center;
   padding: 4rem 0;
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  height: calc(100dvh - 140px);
+  background-color: var(--ifm-color-primary-bg);
 }
 
 @media screen and (max-width: 996px) {
