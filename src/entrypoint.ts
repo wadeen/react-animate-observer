@@ -1,3 +1,3 @@
-import ScrollAnimator from './animation/ScrollAnimator.js';
+import ScrollAnimator from './animation/ScrollAnimator';
 
 export { ScrollAnimator };

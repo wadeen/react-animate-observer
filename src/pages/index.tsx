@@ -1,6 +1,6 @@
 import React from 'react';
-import ScrollAnimator from '../animation/ScrollAnimator.js';
-import { observerOptions } from '../constants/optionObserver.js';
+import ScrollAnimator from '../animation/ScrollAnimator';
+import { observerOptions } from '../constants/optionObserver';
 
 export default function Home() {
   return (

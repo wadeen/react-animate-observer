@@ -1,5 +1,5 @@
 import React from 'react';
-import useIntersectionObserver from '../hooks/useIntersectionObserver.js';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import {
   ElementType,
   ReactNode,
@@ -13,8 +13,8 @@ import {
   IntersectionObserverProps,
   StyleProps,
   TransitionProps,
-} from '../animation/types.js';
-import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS.js';
+} from '../animation/types';
+import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 
 /**
  * The properties expected by the ScrollAnimator component.
@@ -75,7 +75,8 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
     ...observerOptions,
   }); // ref = setNode
 
-  const Tag = as as ElementType;
+  // ToDo: Fix this
+  const Tag = as as any;
   const [inlineStyle, setInlineStyle] = useState<CSSProperties>(
     useTransformPropsToCSS(transition, start),
   );
