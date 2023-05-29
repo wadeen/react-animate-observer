@@ -1,4 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/*.test.ts", "**/pages/", "**/styles/", "**/constants/"]
+  "exclude": [
+    "**/*.test.ts",
+    "**/pages/",
+    "**/styles/",
+    "**/constants/",
+    "**/index.ts",
+    "**/App.ts"
+  ]
 }
