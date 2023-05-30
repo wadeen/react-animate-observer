@@ -1,6 +1,6 @@
 {
   "name": "react-animate-observer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A React component for scroll animations using Intersection Observer",
   "module": "dist/entrypoint.js",
   "types": "dist/entrypoint.d.ts",
