@@ -1,4 +1,4 @@
-import { IntersectionObserverProps } from '../animation/types.js';
+import { IntersectionObserverProps } from '../animation/types';
 import { useState, useEffect, useRef } from 'react';
 
 /**

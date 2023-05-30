@@ -1,8 +1,8 @@
 import React from 'react';
-import ScrollAnimator from '../animation/ScrollAnimator.js';
-import { observerOptions } from '../constants/optionObserver.js';
-
-export default function Home() {
+import ScrollAnimator from './animation/ScrollAnimator';
+import { observerOptions } from './constants/optionObserver';
+import './styles/Home.css';
+export default function App() {
   return (
     <main className="wrapper">
       <h1 className="title">This is Demo space</h1>

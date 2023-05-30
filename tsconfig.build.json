@@ -1,4 +1,13 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/*.test.ts", "**/pages/", "**/styles/", "**/constants/"]
+  "compilerOptions": {
+    "emitDeclarationOnly": true
+  },
+  "exclude": [
+    "**/*.test.ts",
+    "**/styles/",
+    "src/index.tsx",
+    "src/App.tsx",
+    "src/constants/optionObserver.ts"
+  ]
 }

@@ -1,0 +1,57 @@
+.wrapper {
+  padding: 2rem 0;
+}
+
+.container {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 15px;
+  margin-inline: auto;
+  width: fit-content;
+}
+
+.animate {
+  background-color: initial;
+  overflow: hidden;
+
+  width: fit-content;
+  background-color: var(--ifm-color-animate-7);
+  line-height: 1;
+}
+
+@keyframes gradientChange {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+.text {
+  line-height: 1;
+  font-size: min(6vw, 85px);
+  font-weight: 900;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin: 0;
+
+  background: linear-gradient(
+    45deg,
+    var(--color-animate-1),
+    var(--color-animate-2),
+    var(--color-animate-3),
+    var(--color-animate-4),
+    var(--color-animate-5),
+    var(--color-animate-6),
+    var(--color-animate-7),
+    var(--color-animate-8),
+    var(--color-animate-9),
+    var(--color-animate-10)
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientChange 8s ease-in-out infinite;
+  animation-delay: calc(1s * var(--order));
+}

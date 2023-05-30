@@ -1,4 +1,4 @@
-import { TransformProps } from '../animation/types.js';
+import { TransformProps } from '../animation/types';
 
 // Transform props: "Self-made" because it is not in CSSProperties
 export const transformProps: ReadonlyArray<keyof TransformProps> = [

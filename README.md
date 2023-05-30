@@ -1,6 +1,8 @@
 # React Animate Observer 🕹️
+![React Animate Observer](/public/ogp.png "react-animate-observer")
 
 React Animate Observer は React のカスタムフックを使用した Intersection Observer ライブラリで、スクロールによって要素がビューポートに入るときにアニメーションをトリガーします。
+
 
 ## インストール
 
