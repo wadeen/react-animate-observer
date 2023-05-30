@@ -1,7 +1,7 @@
 import React from 'react';
 import ScrollAnimator from './animation/ScrollAnimator';
 import { observerOptions } from './constants/optionObserver';
-
+import './styles/Home.css';
 export default function App() {
   return (
     <main className="wrapper">

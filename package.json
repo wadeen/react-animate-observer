@@ -6,8 +6,8 @@
   "types": "dist/entrypoint.d.ts",
   "type": "module",
   "scripts": {
-    "dev": "react-scripts start",
-    "build": "tsc && node esbuild.config.js",
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "build": "tsc --project tsconfig.build.json && node esbuild.config.js",
     "test": "react-scripts test",
     "lint": "eslint ."
   },
@@ -39,11 +39,14 @@
     "esbuild-node-externals": "^1.7.0",
     "eslint": "8.40.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "html-webpack-plugin": "^5.5.1",
     "prettier": "^2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "^5.0.1",
-    "typescript": "5.0.4"
+    "ts-loader": "^9.4.3",
+    "typescript": "5.0.4",
+    "webpack-cli": "^5.1.1"
   },
   "files": [
     "dist"
@@ -59,5 +62,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3"
   }
 }
