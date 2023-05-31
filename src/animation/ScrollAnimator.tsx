@@ -19,7 +19,7 @@ import useTransformPropsToCSS from '../hooks/useAnimationPropsToCSS';
 /**
  * The properties expected by the ScrollAnimator component.
  */
-interface BaseScrollAnimatorProps {
+type BaseScrollAnimatorProps = {
   /** The children to be rendered inside the ScrollAnimator. */
   children: ReactNode;
   /** The starting styles for the animation. */
@@ -32,13 +32,15 @@ interface BaseScrollAnimatorProps {
   customStyle?: boolean;
   /** Options for the IntersectionObserver. */
   observerOptions?: IntersectionObserverProps;
-}
+  /** Styles other than ScrollAnimator. */
+  style?: Omit<CSSProperties, keyof TransitionProps>;
+};
 
 type ScrollAnimatorProps<T extends keyof JSX.IntrinsicElements> =
   BaseScrollAnimatorProps & {
     /** The HTML element to render as. */
     as?: T;
-  } & JSX.IntrinsicElements[T];
+  } & Omit<JSX.IntrinsicElements[T], 'style'>;
 
 /**
  * ScrollAnimator component. This component is used to animate its children on scroll.
@@ -61,6 +63,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
   as = 'div' as T,
   customStyle = false,
   observerOptions = {},
+  style,
   ...props
 }: ScrollAnimatorProps<T>): ReactElement => {
   /**
@@ -75,8 +78,7 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
     ...observerOptions,
   }); // ref = setNode
 
-  // ToDo: Fix this
-  const Tag = as as any;
+  const Tag = as as ElementType;
   const [inlineStyle, setInlineStyle] = useState<CSSProperties>(
     useTransformPropsToCSS(transition, start),
   );
@@ -95,7 +97,12 @@ const ScrollAnimator = <T extends keyof JSX.IntrinsicElements>({
           {children}
         </Tag>
       ) : (
-        <Tag ref={ref} style={inlineStyle} data-is-active={inView} {...props}>
+        <Tag
+          ref={ref}
+          style={{ ...inlineStyle, ...style }}
+          data-is-active={inView}
+          {...props}
+        >
           {children}
         </Tag>
       )}
