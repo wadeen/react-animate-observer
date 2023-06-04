@@ -2,46 +2,68 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# チュートリアル始めよう！
 
-Let's discover **Docusaurus in less than 5 minutes**.
+React Animate Observer はとても簡単かつ直感的に実装できます。<br />
+いくつかオプションがあったりサンプルコードを用意しているためぜひ試してください 🚀
 
-## Getting Started
+## プロジェクトを準備
 
-Get started by **creating a new site**.
+新しい React プロジェクトを作成してください！<br />
+もちろん、既存プロジェクトに入れても問題ありません。<br />
+以下はあくまで例ですので、自分自身のプロジェクトに合わせて環境の構築をお願いします。
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### React
 
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
+\*React プロジェクトでは vite がおすすめです。
 
 ```bash
-npm init docusaurus@latest my-website classic
+npm create vite@latest
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+[詳細はReact公式サイトをご覧ください](https://ja.legacy.reactjs.org/docs/create-a-new-react-app.html)
+[詳細はVite公式サイトをご覧ください](https://ja.vitejs.dev/guide/)
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
+### Next.js
 
 ```bash
-cd my-website
-npm run start
+create-next-app your-project --typescript
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+[詳細はNext.js公式サイトをご覧ください](https://nextjs.org/docs/getting-started/installation)
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+### Gatsby.js
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+```bash
+npx gatsby new your-project
+```
+
+[詳細はGatsby.js公式サイトをご覧ください](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-0/)
+
+## インストール
+
+:::caution
+このプロジェクトでは、React の**バージョン 17.0.0 以上**をサポートしています。<br />
+既存プロジェクトに取り入れる場合はバージョンアップをお願いします。
+:::
+
+次に、`react-animate-observer`パッケージをプロジェクトに追加する必要があります。<br />
+npm または yarn を使用してインストールできます
+
+### npm
+
+```bash
+npm install react-animate-observer
+```
+
+### yarn
+
+```bash
+yarn add react-animate-observer
+```
+
+### サーバーを立ち上げる
+
+プロジェクトの設定によって変わるため、package.json の scripts に合わせてローカルサーバーを起動してください。
+
+おめでとうございます！これで`react-animate-observer`を使う準備が整いました 🎉
