@@ -1,0 +1,99 @@
+---
+sidebar_position: 5
+---
+
+import { ScrollAnimator } from 'react-animate-observer';
+
+## ルートマージンなどのオプション管理
+
+ビューポートに入ったときにアニメーションを発火させるためのオプションを管理します。<br />
+もちろん個別のアニメーションごとにオプションとして指定することも可能です。
+
+デフォルトでは以下のようになります。
+
+### ルートマージンなどのデフォルト値
+
+```jsx
+  mediaQueryWidth: 768, // min-width()の値になります
+  largeScreenRootMargin: '-35% 0px', // PCサイズのルートマージン
+  smallScreenRootMargin: '-25% 0px', // Mobileサイズのルートマージン
+  threshold: 0, // 閾値
+  once: true // アニメーションを1回のみ実行するか
+```
+
+### オプションを管理する
+
+これらの値を変更したい場合は`observerOptions`でオブジェクトを渡してください。<br />
+例えば、`src > constants > optionObserver.ts`を作成します。
+
+```jsx
+export const observerOptions = {
+  mediaQueryWidth: 820,
+  largeScreenRootMargin: '30% 0px',
+  smallScreenRootMargin: '-20% 0px',
+  threshold: 0.5,
+  once: false,
+};
+```
+
+```jsx
+<ScrollAnimator observerOptions={observerOptions}>
+  <p>Your content goes here</p>
+</ScrollAnimator>
+```
+
+これで、オプションが渡せるので、個別に設定することができます。<br />
+いくつかパターンを用意して、使い分けることも可能です。
+
+### アニメーションのオプションを管理
+
+アニメーションはいくつかパターン化することが多いかと思うので、その処理を`src > constants > optionAnimation.ts`に書くのもいいでしょう。
+
+```jsx
+// フェイドアップアニメーションのオプション
+export const fadeUpComponent = {
+  start: {
+    translateY: 40,
+    opacity: 0,
+  },
+  end: {
+    translateY: 0,
+    opacity: 1,
+  },
+  transition: {
+    transitionDuration: 0.8,
+    transitionTimingFunction: 'ease-in-out',
+  },
+};
+
+// 右から左へのアニメーションのオプション
+export const slideInRightAnimation = {
+  start: {
+    translateX: 100,
+    opacity: 0,
+  },
+  end: {
+    translateX: 0,
+    opacity: 1,
+  },
+  transition: {
+    transitionDuration: 0.8,
+    transitionTimingFunction: 'ease-in',
+  },
+};
+```
+
+使用する際は、スプレッド構文で展開して渡してあげると良いでしょう。
+
+```jsx
+<ScrollAnimator {...fadeUpComponent}>
+  <p>Your content goes here</p>
+</ScrollAnimator>
+
+<ScrollAnimator {...slideInRightAnimation}>
+  <p>Your content goes here</p>
+</ScrollAnimator>
+```
+
+これでスマート記述することができました。<br />
+よく使うものはコンポーネント化しておきましょう。

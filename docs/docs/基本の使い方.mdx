@@ -1,0 +1,215 @@
+---
+sidebar_position: 1
+---
+
+import { ScrollAnimator } from 'react-animate-observer';
+
+React Animate Observer は「アニメーションをもっと簡単に」することをテーマに作成されています。<br />
+ですので特に難しい設定などいりません。<br />
+まずは基本的な使い方を見ていきましょう。
+
+## インポート
+
+まずはインポートしましょう。<br />
+`ScrollAnimator`のみインポートすれば OK です。
+
+```jsx
+import { ScrollAnimator } from 'react-animate-observer';
+```
+
+## 基本的な使い方
+
+以下のようにすると、`ScrollAnimator`の中に入れた要素が画面に表示された時にアニメーションが実行されます。
+
+```jsx
+const YourComponent = () => {
+  return (
+    <ScrollAnimator
+      start={{ opacity: 0, translateY: 40 }}
+      end={{ opacity: 1, translateY: 0 }}
+      transition={{
+        transitionDuration: 0.6,
+        transitionTimingFunction: 'ease-in-out',
+      }}
+    >
+      <div>Your content goes here</div>
+    </ScrollAnimator>
+  );
+};
+```
+
+これを実装すると以下のようになります
+
+<ScrollAnimator
+  start={{ opacity: 0, translateY: 40 }}
+  end={{ opacity: 1, translateY: 0 }}
+  transition={{
+    transitionDuration: 0.6,
+    transitionTimingFunction: 'ease-in-out',
+  }}
+  style={{
+    display: 'grid',
+    placeItems: 'center',
+    width: '100%',
+    height: '100px',
+    backgroundColor: 'teal',
+    color: 'white',
+  }}
+>
+  <div>Your content goes here</div>
+</ScrollAnimator>
+
+---
+
+### アニメーションのデフォルト値
+
+`ScrollAnimator`は、`start`と`end`と`transition`の 3 つのプロパティを持っています。<br />
+これらは、初期値を持っているため、何も渡さなくても動きます。
+
+```jsx
+<ScrollAnimator>
+  <div>Your content goes here</div>
+</ScrollAnimator>
+```
+
+<ScrollAnimator
+  style={{
+    display: 'grid',
+    placeItems: 'center',
+    width: '100%',
+    height: '100px',
+    backgroundColor: 'teal',
+    color: 'white',
+  }}
+>
+  <div>Your content goes here</div>
+</ScrollAnimator>
+<br />
+
+初期値は以下のようになっています。
+
+```jsx
+  start = { opacity: 0, translateY: 30 },
+  end = { opacity: 1, translateY: 0 },
+  transition = {
+    transitionDelay: 0.1,
+    transitionDuration: 0.4,
+    transitionTimingFunction: 'ease-in',
+  },
+```
+
+### アニメーションの受け取れるプロパティ
+
+#### start・end
+
+[tranistion](#tranistion) 以外の CSS プロパティを受け取ることができます。<br />
+さらに、transofrm 関連のスタイルを定義しやすいように、`react-animate-observer`が独自で定義したプロパティが使えます。
+
+詳細は、[カスタムスタイル要素](./カスタムスタイル要素)をご覧ください。
+
+#### transition
+
+tranistion では、以下のような型で受け取ることが可能です。<br />
+`transitionDelay`と`transitionDuration`のみ指定しやすいように number 型にしています。
+
+```ts
+type TransitionProps = Partial<{
+  transitionDelay: number;
+  transitionDuration: number;
+  transitionProperty: CSSProperties['transitionProperty'];
+  transitionTimingFunction: CSSProperties['transitionTimingFunction'];
+  transition: CSSProperties['transition'];
+}>;
+```
+
+基本的には、JSX の style 属性に渡すものと同じです。型補完も効くため、直感的に使うことができます。
+
+#### アニメーションのタイミングをずらす
+
+例えば、複数の要素が横並びの際に、アニメーションのタイミングをずらしたい場合があります。<br />
+その場合は、`transitionDelay`を使うことで、タイミングをずらすことができます。
+
+特に、`map`を使う際は、`index`を使うことで、簡単にタイミングをずらすことができます。
+
+<div
+  style={{
+    display: 'flex',
+  }}
+>
+  <ScrollAnimator
+    start={{ opacity: 0, translateY: 40 }}
+    end={{ opacity: 1, translateY: 0 }}
+    transition={{
+      transitionDelay: 0.4,
+      transitionDuration: 0.6,
+      transitionTimingFunction: 'ease-in-out',
+    }}
+    style={{
+      width: 'calc(100% / 3)',
+      height: '100px',
+      backgroundColor: 'teal',
+      color: 'white',
+    }}
+  >
+    <div>Your content goes here</div>
+  </ScrollAnimator>
+  <ScrollAnimator
+    start={{ opacity: 0, translateY: 40 }}
+    end={{ opacity: 1, translateY: 0 }}
+    transition={{
+      transitionDelay: 0.6,
+      transitionDuration: 0.6,
+      transitionTimingFunction: 'ease-in-out',
+    }}
+    style={{
+      width: 'calc(100% / 3)',
+      height: '100px',
+      backgroundColor: 'orange',
+      color: 'white',
+    }}
+  >
+    <div>Your content goes here</div>
+  </ScrollAnimator>
+  <ScrollAnimator
+    start={{ opacity: 0, translateY: 40 }}
+    end={{ opacity: 1, translateY: 0 }}
+    transition={{
+      transitionDelay: 0.8,
+      transitionDuration: 0.6,
+      transitionTimingFunction: 'ease-in-out',
+    }}
+    style={{
+      display: 'grid',
+      placeItems: 'center',
+      width: 'calc(100% / 3)',
+      height: '100px',
+      backgroundColor: 'tomato',
+      color: 'white',
+    }}
+  >
+    <div>Your content goes here</div>
+  </ScrollAnimator>
+</div>
+
+<br />
+
+```jsx
+const YourComponent = () => {
+  return (
+    <div>
+      {['a', 'b', 'c'].map((item, index) => (
+        <ScrollAnimator
+          key={item}
+          transition={{
+            transitionDelay: 0.4 + index * 0.2, // 0.2秒ずつずらす
+          }}
+        >
+          <div>{item}</div>
+        </ScrollAnimator>
+      ))}
+    </div>
+  );
+};
+```
+
+続いて、`react-animate-observer`で定義している[カスタムスタイル要素](./カスタムスタイル要素)についてみていきましょう 🕹️
