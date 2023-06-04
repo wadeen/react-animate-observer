@@ -42,7 +42,7 @@ const config = {
           // Please change this to your repo.tarn
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/wadeen/react-animate-observer/edit/main/',
         },
         // blog: {
         //   showReadingTime: true,
