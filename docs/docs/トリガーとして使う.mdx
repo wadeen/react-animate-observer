@@ -1,0 +1,43 @@
+---
+sidebar_position: 4
+---
+
+import { ScrollAnimator } from 'react-animate-observer';
+
+## 自動で data-is-active を付与
+
+`react-animate-observer`では、トリガーとしても使えるようにしています。<br />
+`ScrollAnimator`で囲った要素が画面内に入ったら、自動で`data-is-active`が付与されます。
+
+start, end でのスタイルだけでは表せないこともあります。例えば、
+
+- 疑似要素を使って背景をアニメーションさせたい
+- 複数の要素を同時にアニメーションさせたい
+- 複雑にアニメーションさせたいので、CSS アニメーション独自で定義したい
+
+```jsx
+<ScrollAnimator>
+  <p>Your content goes here</p>
+</ScrollAnimator>
+
+// <div data-is-active="true"> // true / false切替わる
+// <p>Your content goes here</p>
+// </div>
+```
+
+### アニメーションの初期値のリセット
+
+自分で CSS を書いてアニメーションする際、初期値が不要なことがあります。<br />
+その場合、`start={} end={} transition={}`と指定するのは面倒です。<br />
+
+その際は以下のようにしてください。
+
+```jsx
+<ScrollAnimator customStyle={true}>
+  <p>Your content goes here</p>
+</ScrollAnimator>
+```
+
+`customStyle={true}`を指定すると初期値がリセットされるので使用してみてください。
+
+最後に、[ルートマージンなどのオプション管理](./オプションの管理)について紹介します！

@@ -1,0 +1,54 @@
+---
+sidebar_position: 2
+---
+
+import { ScrollAnimator } from 'react-animate-observer';
+
+## カスタムスタイル要素が必要な理由
+
+ここでは、`react-animate-observer`で使える transform のスタイルを紹介します。<br/>
+ほとんどは、 JSX で渡せる CSS プロパティで完結しますが、例外があります。
+
+`transform`プロパティは、`translate`や、`rotate`を直接指定することができますが、<br/>
+`translateX`や、`rotateY`などのようなプロパティは、直接指定することができません。
+
+```jsx
+// 例）translateXは、以下のようにしないといけない🙅‍♂️
+<div style={{ transform: 'translateX(100px)' }} />...</div>
+```
+
+これは直感的ではありません 🙅‍♂️<br/>
+
+それを補うために、`react-animate-observer`では直接指定できるようにしています。<br/>
+ですので、新しく覚えるようなものではなく、あくまで簡単に指定できるようにしているだけです。
+
+## カスタムスタイル要素の一覧
+
+| 変換前                 | 変換後     | 型     |
+| ---------------------- | ---------- | ------ |
+| translateX(${value}px) | translateX | number |
+| translateY(${value}px) | translateY | number |
+| translateZ(${value}px) | translateZ | number |
+| rotateX(${value}deg)   | rotateX    | number |
+| rotateY(${value}deg)   | rotateY    | number |
+| rotateZ(${value}deg)   | rotateZ    | number |
+| skewX(${value}deg)     | skewX      | number |
+| skewY(${value}deg)     | skewY      | number |
+| scaleX(${value})       | scaleX     | number |
+| scaleY(${value})       | scaleY     | number |
+| scaleZ(${value})       | scaleZ     | number |
+
+カスタムスタイルと表現しましたが実際の中身は CSS スタイルです。
+
+## tranistion を別々に指定したい場合
+
+例えば、`opacity`のみ、0.3 秒で、`transform`のみ、0.5 秒でアニメーションさせたいとします。<br />
+`ScrollAnimator`の `transition` は、すべて同じ秒数・タイミングになります。
+
+その際は通常通り、JSX の CSS プロパティで指定してください。
+
+```jsx
+<div style={{ transition:  'opacity .3s ease, transform .5s ease-out' }} />...</div>
+```
+
+次は、[HTML タグを指定する方法](./カスタムHTMLタグ)を紹介します。

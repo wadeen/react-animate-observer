@@ -1,0 +1,36 @@
+---
+sidebar_position: 3
+---
+
+import { ScrollAnimator } from 'react-animate-observer';
+
+## カスタム HTML タグの指定方法
+
+これは非常に簡単です。以下のようにしてください。<br />
+`ScrollAnimator`では、スクロールアニメーションを適用する要素を`as`プロパティで指定します。
+
+```jsx
+<ScrollAnimator as="section">
+  <p>Your content goes here</p>
+</ScrollAnimator>
+
+// <section>
+// <p>Your content goes here</p>
+// </section>
+```
+
+### JSX 要素の型補完
+
+`ScrollAnimator`は、JSX と同じようにタグや属性を指定できます。そしてもちろん型保管も効きます。<br />
+
+```jsx
+<ScrollAnimator as="a" href={'/about'} target="_blank">
+  Your link goes here
+</ScrollAnimator>
+
+// <a href="/about" target="_blank">
+// Your link goes here
+// </a>
+```
+
+次は、[トリガーとして使用する方法](./トリガーとして使う)を紹介します。
