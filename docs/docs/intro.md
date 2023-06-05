@@ -48,18 +48,10 @@ npx gatsby new your-project
 :::
 
 次に、`react-animate-observer`パッケージをプロジェクトに追加する必要があります。<br />
-npm または yarn を使用してインストールできます
+npm または yarn、pnpm を使用してインストールできます
 
-### npm
-
-```bash
+```bash npm2yarn
 npm install react-animate-observer
-```
-
-### yarn
-
-```bash
-yarn add react-animate-observer
 ```
 
 ### サーバーを立ち上げる
